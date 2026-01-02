@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --gradient_time: 60s;
+      --background_bottom_color: rgb(145 145 145);
+      --tab_icons_size: 35%;
+    }
+
+
+    * {
+      box-sizing: border-box
+    }
+
+
+    /* Set height of body and the document to 100% */
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(36deg, #eeeda6, #6076f3, #915987, #186aa3);
+      background-size: 800% 800%;
+
+      -webkit-animation: AnimationName var(--gradient_time) ease infinite;
+      -moz-animation: AnimationName var(--gradient_time) ease infinite;
+      animation: AnimationName var(--gradient_time) ease infinite;
+      /* background: linear-gradient(0deg, rgb(7, 7, 7), rgb(218, 218, 218)); */
+      /* padding: 2% 2%; */
+      /* width: 40%; */
+      /* margin: auto; */
+      position: center;
+    }
+
+    .mainframe {
+      /* background: linear-gradient(to bottom, rgb(7, 7, 7), rgb(218, 218, 218)); */
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      /* border-style: solid;
+      border-width: 0.5px; */
+      height: 550px;
+      width: 350px;
+    }
+
+    /* Style tab links */
+    .tablink {
+      background-color: rgb(14, 71, 85);
+      color: white;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 6% 16px;
+      font-size: 17px;
+      width: 25%;
+    }
+
+    .tablink:hover {
+      background-color: rgb(33, 113, 133);
+    }
+
+    /* Style the tab content (and add height:100% for full page content) */
+    .tabcontent {
+      color: white;
+      display: none;
+      padding: 65px 50px;
+      height: 100%;
+      border: 2px solid;
+    }
+
+    .control_buttons {
+      width: 250px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .c_button {
+      width: 50px;
+      height: 25px;
+      font-size: 90%;
+      border-radius: 5%;
+      border: 1px solid black;
+      background-color: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 1px;
+    }
+
+    #effect_name {
+      width: 248px;
+      justify-content: center;
+      font-family: fantasy;
+      text-align: center;
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 150%;
+    }
+
+    #scheduler_box {
+      width: 250px;
+      height: 200px;
+      /* display: flex; */
+      justify-content: space-between;
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .name_label {
+      color: rgb(184, 184, 184);
+      width: 248px;
+      text-shadow: 0 0 5px rgb(14, 71, 85), 0 0 2px royalblue;
+      justify-content: center;
+      font-family: fantasy;
+      text-align: center;
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 130%;
+    }
+
+    .name_label_small {
+      width: 148px;
+      text-shadow: 0 0 5px rgb(14, 71, 85), 0 0 2px royalblue;
+      justify-content: center;
+      font-family: fantasy;
+      text-align: center;
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 100%;
+    }
+
+    .adjustment_slider {
+      /* -webkit-appearance: sliderthumb-horizontal; */
+      /* justify-content: space-evenly; */
+      width: 248px;
+      /* height: 25px; */
+      border-radius: 5px;
+      background: #d3d3d3;
+      /* outline: none; */
+      /* text-align: center; */
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+      display: flex;
+      margin: auto;
+    }
+
+
+    .small_box {
+      background-color: #103631;
+      border-radius: 5px;
+    }
+
+    .inline_components {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: baseline;
+      /* margin-left: 8px; */
+      /* margin-bottom: 1px; */
+      /* margin-right: auto; */
+      height: 33px;
+    }
+
+
+    .flavor_buttons {
+      /* background-color: #04AA6D; */
+      font-size: small;
+      border: none;
+      display: flex;
+      justify-content: center;
+      width: 250px;
+    }
+
+    .flavor_select {
+      font-size: smaller;
+      /* font-weight: 600; */
+      border-radius: 10px;
+      height: 21px;
+    }
+
+
+    #main {
+      background: linear-gradient(to bottom, rgb(25 34 68), var(--background_bottom_color));
+    }
+
+    #scheduler {
+      background: linear-gradient(to bottom, rgb(142, 250, 142), var(--background_bottom_color));
+    }
+
+    #colors {
+      background: linear-gradient(to bottom, rgb(132, 255, 218), var(--background_bottom_color));
+    }
+
+    #wifi {
+      background: linear-gradient(to bottom, rgb(255, 222, 161), var(--background_bottom_color));
+    }
+
+    #other {
+      background: linear-gradient(to bottom, rgb(255, 161, 255), var(--background_bottom_color));
+    }
+
+    @-webkit-keyframes AnimationName {
+      0% {
+        background-position: 90% 0%
+      }
+
+      50% {
+        background-position: 11% 100%
+      }
+
+      100% {
+        background-position: 90% 0%
+      }
+    }
+
+    @-moz-keyframes AnimationName {
+      0% {
+        background-position: 90% 0%
+      }
+
+      50% {
+        background-position: 11% 100%
+      }
+
+      100% {
+        background-position: 90% 0%
+      }
+    }
+
+    @keyframes AnimationName {
+      0% {
+        background-position: 90% 0%
+      }
+
+      50% {
+        background-position: 11% 100%
+      }
+
+      100% {
+        background-position: 90% 0%
+      }
+    }
+
+
+    /* The switch - the box around the slider */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 20px;
+      top: -3px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* The slider */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 2px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked+.slider {
+      background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+      -webkit-transform: translateX(18px);
+      -ms-transform: translateX(18px);
+      transform: translateX(18px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+    .collapsible {
+      background-color: #296661;
+      color: white;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .active,
+    .collapsible:hover {
+      background-color: #103631;
+    }
+
+    .collapsible:after {
+      content: '\002B';
+      color: white;
+      font-weight: bold;
+      float: right;
+      margin-left: 5px;
+    }
+
+    .active:after {
+      content: "\2212";
+    }
+
+    .effect_settings {
+      padding: 0 18px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+      background-color: #f1f1f1;
+    }
+
+    .button_box {
+      width: 250px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100%;
+    }
+
+
+
+    #home_icon {
+      background-repeat: no-repeat;
+      background-size: var(--tab_icons_size);
+      background-position: center;
+      /* background-color: #103631; */
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDgiIHdpZHRoPSI0OCI+PHBhdGggZD0iTTExIDM5aDcuNVYyNi41aDExVjM5SDM3VjE5LjVMMjQgOS43NSAxMSAxOS41Wm0tMyAzVjE4TDI0IDZsMTYgMTJ2MjRIMjYuNVYyOS41aC01VjQyWm0xNi0xNy42NVoiLz48L3N2Zz4%3D);
+    }
+
+    #schedule_icon {
+        background-repeat: no-repeat;
+        background-size: var(--tab_icons_size);
+        background-position: center;
+      /* background-color: #103631; */
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDAwMDAwIj48cGF0aCBkPSJNNDgwLTgwcS03NSAwLTE0MC41LTI4LjV0LTExNC03N3EtNDguNS00OC41LTc3LTExNFQxMjAtNDQwcTAtNzUgMjguNS0xNDAuNXQ3Ny0xMTRxNDguNS00OC41IDExNC03N1Q0ODAtODAwcTc1IDAgMTQwLjUgMjguNXQxMTQgNzdxNDguNSA0OC41IDc3IDExNFQ4NDAtNDQwcTAgNzUtMjguNSAxNDAuNXQtNzcgMTE0cS00OC41IDQ4LjUtMTE0IDc3VDQ4MC04MFptMC0zNjBabTExMiAxNjggNTYtNTYtMTI4LTEyOHYtMTg0aC04MHYyMTZsMTUyIDE1MlpNMjI0LTg2Nmw1NiA1Ni0xNzAgMTcwLTU2LTU2IDE3MC0xNzBabTUxMiAwIDE3MCAxNzAtNTYgNTYtMTcwLTE3MCA1Ni01NlpNNDgwLTE2MHExMTcgMCAxOTguNS04MS41VDc2MC00NDBxMC0xMTctODEuNS0xOTguNVQ0ODAtNzIwcS0xMTcgMC0xOTguNSA4MS41VDIwMC00NDBxMCAxMTcgODEuNSAxOTguNVQ0ODAtMTYwWiIvPjwvc3ZnPg==)
+    }
+
+
+
+    #colors_icon {
+      background-repeat: no-repeat;
+      background-size: var(--tab_icons_size);
+      background-position: center;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDgiIHdpZHRoPSI0OCI+PHBhdGggZD0iTTI0IDQ0cS00LjEgMC03Ljc1LTEuNTc1LTMuNjUtMS41NzUtNi4zNzUtNC4zLTIuNzI1LTIuNzI1LTQuMy02LjM3NVE0IDI4LjEgNCAyNHEwLTQuMjUgMS42LTcuOSAxLjYtMy42NSA0LjM3NS02LjM1IDIuNzc1LTIuNyA2LjUtNC4yMjVRMjAuMiA0IDI0LjQ1IDRxMy45NSAwIDcuNSAxLjMyNVQzOC4xNzUgOXEyLjY3NSAyLjM1IDQuMjUgNS41NzVRNDQgMTcuOCA0NCAyMS42NXEwIDUuNC0zLjE1IDguNTI1VDMyLjUgMzMuM2gtMy43NXEtLjkgMC0xLjU1Ljd0LS42NSAxLjU1cTAgMS4zNS43MjUgMi4zLjcyNS45NS43MjUgMi4yIDAgMS45LTEuMDUgMi45MjVUMjQgNDRabTAtMjBabS0xMS42NSAxLjNxMSAwIDEuNzUtLjc1dC43NS0xLjc1cTAtMS0uNzUtMS43NXQtMS43NS0uNzVxLTEgMC0xLjc1Ljc1dC0uNzUgMS43NXEwIDEgLjc1IDEuNzV0MS43NS43NVptNi4zLTguNXExIDAgMS43NS0uNzV0Ljc1LTEuNzVxMC0xLS43NS0xLjc1dC0xLjc1LS43NXEtMSAwLTEuNzUuNzV0LS43NSAxLjc1cTAgMSAuNzUgMS43NXQxLjc1Ljc1Wm0xMC43IDBxMSAwIDEuNzUtLjc1dC43NS0xLjc1cTAtMS0uNzUtMS43NXQtMS43NS0uNzVxLTEgMC0xLjc1Ljc1dC0uNzUgMS43NXEwIDEgLjc1IDEuNzV0MS43NS43NVptNi41NSA4LjVxMSAwIDEuNzUtLjc1dC43NS0xLjc1cTAtMS0uNzUtMS43NXQtMS43NS0uNzVxLTEgMC0xLjc1Ljc1dC0uNzUgMS43NXEwIDEgLjc1IDEuNzV0MS43NS43NVpNMjQgNDFxLjU1IDAgLjc3NS0uMjI1LjIyNS0uMjI1LjIyNS0uNzI1IDAtLjctLjcyNS0xLjMtLjcyNS0uNi0uNzI1LTIuNjUgMC0yLjMgMS41LTQuMDV0My44LTEuNzVoMy42NXEzLjggMCA2LjE1LTIuMjI1UTQxIDI1Ljg1IDQxIDIxLjY1cTAtNi42LTUtMTAuNjI1VDI0LjQ1IDdxLTcuMyAwLTEyLjM3NSA0LjkyNVQ3IDI0cTAgNy4wNSA0Ljk3NSAxMi4wMjVRMTYuOTUgNDEgMjQgNDFaIi8+PC9zdmc+);
+    }
+
+    #wifi_icon {
+      background-repeat: no-repeat;
+      background-size: var(--tab_icons_size);
+      background-position: center;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDgiIHdpZHRoPSI0OCI+PHBhdGggZD0iTTguNjUgNDJxLTEuMiAwLTIuMS0uOS0uOS0uOS0uOS0yLjFWMjguNjVxMC0xLjIuOS0yLjEuOS0uOSAyLjEtLjloMjMuMVYxNi44aDN2OC44NWg1LjJxMS4yIDAgMi4xLjkuOS45LjkgMi4xVjM5cTAgMS4yLS45IDIuMS0uOS45LTIuMS45Wm0zMS4zLTNWMjguNjVIOC42NVYzOVptLTI0LjQtNS4xNXEwLS45LS42LTEuNXQtMS41LS42cS0uOSAwLTEuNS42dC0uNiAxLjVxMCAuOS42IDEuNXQxLjUuNnEuOSAwIDEuNS0uNnQuNi0xLjVabTcuNCAwcTAtLjktLjYtMS41dC0xLjUtLjZxLS45IDAtMS41LjZ0LS42IDEuNXEwIC45LjYgMS41dDEuNS42cS45IDAgMS41LS42dC42LTEuNVptNS4zIDIuMXEuOSAwIDEuNS0uNnQuNi0xLjVxMC0uOS0uNi0xLjV0LTEuNS0uNnEtLjkgMC0xLjUuNnQtLjYgMS41cTAgLjkuNiAxLjV0MS41LjZabTEtMjEuM0wyNy4yIDEyLjZxMS4yLTEuMiAyLjcyNS0xLjkgMS41MjUtLjcgMy4zMjUtLjcgMS44IDAgMy4zMjUuNyAxLjUyNS43IDIuNzI1IDEuOWwtMi4wNSAyLjA1cS0uNy0uNy0xLjc1LTEuMTc1UTM0LjQ1IDEzIDMzLjMgMTNxLTEuMiAwLTIuMjc1LjQ3NVQyOS4yNSAxNC42NVpNMjUgMTAuNGwtMi4yLTIuMnExLjY1LTEuNjUgNC40LTIuOTI1UTI5Ljk1IDQgMzMuMjUgNHQ2LjA1IDEuMjc1UTQyLjA1IDYuNTUgNDMuNyA4LjJsLTIuMiAyLjJxLTEuMy0xLjQ1LTMuNDI1LTIuNDI1UTM1Ljk1IDcgMzMuMjUgN3QtNC44MjUuOTc1UTI2LjMgOC45NSAyNSAxMC40Wk04LjY1IDM5VjI4LjY1IDM5WiIvPjwvc3ZnPg%3D%3D);
+    }
+
+    #other_icon {
+      background-repeat: no-repeat;
+      background-size: var(--tab_icons_size);
+      background-position: center;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDgiIHdpZHRoPSI0OCI+PHBhdGggZD0ibTE5LjQgNDQtMS02LjNxLS45NS0uMzUtMi0uOTV0LTEuODUtMS4yNWwtNS45IDIuN0w0IDMwbDUuNC0zLjk1cS0uMS0uNDUtLjEyNS0xLjAyNVE5LjI1IDI0LjQ1IDkuMjUgMjRxMC0uNDUuMDI1LTEuMDI1VDkuNCAyMS45NUw0IDE4bDQuNjUtOC4yIDUuOSAyLjdxLjgtLjY1IDEuODUtMS4yNXQyLS45bDEtNi4zNWg5LjJsMSA2LjNxLjk1LjM1IDIuMDI1LjkyNVEzMi43IDExLjggMzMuNDUgMTIuNWw1LjktMi43TDQ0IDE4bC01LjQgMy44NXEuMS41LjEyNSAxLjA3NS4wMjUuNTc1LjAyNSAxLjA3NXQtLjAyNSAxLjA1cS0uMDI1LjU1LS4xMjUgMS4wNUw0NCAzMGwtNC42NSA4LjItNS45LTIuN3EtLjguNjUtMS44MjUgMS4yNzUtMS4wMjUuNjI1LTIuMDI1LjkyNWwtMSA2LjNaTTI0IDMwLjVxMi43IDAgNC42LTEuOSAxLjktMS45IDEuOS00LjYgMC0yLjctMS45LTQuNi0xLjktMS45LTQuNi0xLjktMi43IDAtNC42IDEuOS0xLjkgMS45LTEuOSA0LjYgMCAyLjcgMS45IDQuNiAxLjkgMS45IDQuNiAxLjlabTAtM3EtMS40NSAwLTIuNDc1LTEuMDI1UTIwLjUgMjUuNDUgMjAuNSAyNHEwLTEuNDUgMS4wMjUtMi40NzVRMjIuNTUgMjAuNSAyNCAyMC41cTEuNDUgMCAyLjQ3NSAxLjAyNVEyNy41IDIyLjU1IDI3LjUgMjRxMCAxLjQ1LTEuMDI1IDIuNDc1UTI1LjQ1IDI3LjUgMjQgMjcuNVptMC0zLjVabS0yLjIgMTdoNC40bC43LTUuNnExLjY1LS40IDMuMTI1LTEuMjVUMzIuNyAzMi4xbDUuMyAyLjMgMi0zLjYtNC43LTMuNDVxLjItLjg1LjMyNS0xLjY3NS4xMjUtLjgyNS4xMjUtMS42NzUgMC0uODUtLjEtMS42NzUtLjEtLjgyNS0uMzUtMS42NzVMNDAgMTcuMmwtMi0zLjYtNS4zIDIuM3EtMS4xNS0xLjMtMi42LTIuMTc1LTEuNDUtLjg3NS0zLjItMS4xMjVMMjYuMiA3aC00LjRsLS43IDUuNnEtMS43LjM1LTMuMTc1IDEuMi0xLjQ3NS44NS0yLjYyNSAyLjFMMTAgMTMuNmwtMiAzLjYgNC43IDMuNDVxLS4yLjg1LS4zMjUgMS42NzUtLjEyNS44MjUtLjEyNSAxLjY3NSAwIC44NS4xMjUgMS42NzUuMTI1LjgyNS4zMjUgMS42NzVMOCAzMC44bDIgMy42IDUuMy0yLjNxMS4yIDEuMiAyLjY3NSAyLjA1UTE5LjQ1IDM1IDIxLjEgMzUuNFoiLz48L3N2Zz4%3D);
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+
+  </script>
+  <!-- SVG -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
+      <line x1="75" y1="34" x2="75" y2="58" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
+      <circle cx="75" cy="80" r="35" />
+    </symbol>
+  </svg>
+</head>
+
+<body>
+  <div class="mainframe">
+    <button class="tablink" id="home_icon" onclick="openPage('main', this, 'red')"></button>
+    <button class="tablink" id="schedule_icon" onclick="openPage('scheduler', this, 'green')"></button>
+    <button class="tablink" id="wifi_icon" onclick="openPage('wifi', this, 'yellow')"></button>
+    <button class="tablink" id="other_icon" onclick="openPage('other', this, 'orange')"></button>
+
+    <div id="main" class="tabcontent">
+      <!--- MAIN PAGE --->
+      <!-- POWER BUTTON -->
+
+      <div id="device_status">
+        <div>
+          <label for="status" class="name_label">STATUS</label>
+
+        </div>
+      </div>
+      <!--- MAIN PAGE --->
+    </div>
+
+    <div id="scheduler" class="tabcontent">
+      <label for="scheduler_box" class="name_label">SCHEDULER</label>
+      <div style="overflow-y: auto; height: 300px; border: 1px solid; border-radius: 5px;" id="scheduler_box">
+      
+
+      </div>
+      <div class="button_box">
+        <button type="button" onclick=change_anim("p")>Expand all</button>
+        <button type="button" onclick=change_anim("p")>Collapse all</button>
+      </div>
+
+    </div>
+
+    <div id="wifi" class="tabcontent">
+      <h3>Contact</h3>
+      <p>Get in touch, or swing by for a cup of coffee.</p>
+    </div>
+
+    <div id="other" class="tabcontent">
+      <h3>About</h3>
+      <p>Who we are and what we do.</p>
+    </div>
+  </div>
+
+
+  <!--- TAB SELECT --->
+  <script>
+    function openPage(pageName, elmnt, color) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+      }
+      document.getElementById(pageName).style.display = "block";
+      elmnt.style.backgroundColor = color;
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("home_icon").click();
+
+    // Collapsible
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+        }
+      });
+    }
+  </script>
+
+</body>
+
+</html>
