@@ -1,2 +1,5 @@
 # Documentation folder
 docs/
+
+# Arduino build files
+.vdcode/

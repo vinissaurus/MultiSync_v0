@@ -1,0 +1,6 @@
+{
+    "configuration": "CDCOnBoot=default,PartitionScheme=default,CPUFreq=160,FlashMode=qio,FlashFreq=80,FlashSize=4M,UploadSpeed=921600,DebugLevel=none,EraseFlash=none",
+    "board": "esp32:esp32:esp32c3",
+    "port": "COM12",
+    "sketch": "src\\MultiSync_V0\\MultiSync_V0.ino"
+}
